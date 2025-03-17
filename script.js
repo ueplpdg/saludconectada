@@ -9,10 +9,23 @@ function mostrarSeccion(seccion) {
     setTimeout(() => activeSection.classList.add('visible'), 50); // Efecto de entrada
 }
 
-// Iniciar videollamada (simulación)
-function iniciarVideollamada() {
-    alert('Conectando con un doctor... (Esto es una simulación)');
-}
+// Iniciar videollamada (Jitsi Meet con servidor privado)
+document.addEventListener('DOMContentLoaded', function() {
+    const startCallButton = document.getElementById('iniciarVideollamadaBtn');
+    const jitsiContainer = document.getElementById('jitsi-container');
+
+    startCallButton.addEventListener('click', function() {
+        const domain = 'meet.jit.si/salaDelDoctor2025'; // Reemplaza con tu dominio
+        const roomName = 'salaDelDoctor2025'; // Sala dedicada al doctor
+        const options = {
+            roomName: roomName,
+            width: '100%',
+            height: 500,
+            parentNode: jitsiContainer,
+        };
+        const api = new JitsiMeetExternalAPI(domain, options);
+    });
+});
 
 // Agregar recordatorios con animación
 function agregarRecordatorio() {
