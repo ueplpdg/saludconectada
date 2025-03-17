@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const jitsiContainer = document.getElementById('jitsi-container');
 
     startCallButton.addEventListener('click', function() {
-        const domain = 'meet.jit.si/salaDelDoctor0301599080'; // Reemplaza con tu dominio
-        const roomName = 'salaDelDoctor0301599080'; // Sala dedicada al doctor
+        const domain = 'meet.jit.si/salaDelDoctor2025'; // Reemplaza con tu dominio
+        const roomName = 'salaDelDoctor2025'; // Sala dedicada al doctor
         const options = {
             roomName: roomName,
             width: '100%',
