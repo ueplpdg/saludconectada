@@ -36,9 +36,22 @@ function agregarRecordatorio() {
     }
 }
 
-// Salud Mental: Agendar Cita (simulación)
-function agendarCita() {
-    alert('Funcionalidad de agendar cita aún no implementada.');
+// Salud Mental: Agendar Cita (eliminamos la simulación)
+function agendarCitaPsicologia() {
+    // Mostrar la sección "Agendar Cita"
+    mostrarSeccion('citas');
+
+    // Preseleccionar la especialidad "Psicología - Gabriela Salazar"
+    const specialistSelect = document.getElementById('specialist');
+    if (specialistSelect) {
+        specialistSelect.value = 'Psicología - Gabriela Salazar';
+    }
+
+    // Limpiar el campo de fecha y el resultado previo
+    const dateInput = document.getElementById('appointment-date');
+    const resultDiv = document.getElementById('appointment-result');
+    if (dateInput) dateInput.value = '';
+    if (resultDiv) resultDiv.innerHTML = '';
 }
 
 // Salud Mental: Prueba de Autoevaluación
