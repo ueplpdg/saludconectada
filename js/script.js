@@ -10,17 +10,17 @@ function mostrarSeccion(seccion) {
 }
 
 // Función para unirse a la videollamada con el código único del médico o nutricionista
-function unirseVideollamada(roomCode) {
+function unirseVideollamada(roomCode, containerId = 'jitsi-container') {
     const domain = 'meet.jit.si';
     const options = {
         roomName: roomCode,
         width: '100%',
         height: 600,
-        parentNode: document.querySelector('#jitsi-container'),
+        parentNode: document.querySelector(`#${containerId}`),
         interfaceConfigOverwrite: { SHOW_JITSI_WATERMARK: false }
     };
     new JitsiMeetExternalAPI(domain, options);
-    document.getElementById('jitsi-container').style.display = 'block';
+    document.getElementById(containerId).style.display = 'block';
 }
 
 // Agregar recordatorios con animación
