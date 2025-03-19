@@ -4,21 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SaludConectada - Salud y Bienestar</title>
+    <!-- Google Fonts para tipografía moderna -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Google Maps API (reemplaza YOUR_API_KEY con tu clave si la tienes) -->
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" defer></script>
+    <!-- Jitsi Meet API -->
+    <script src="https://meet.jit.si/external_api.js"></script>
 </head>
 <body>
+    <!-- Header impactante -->
     <header class="bg-primary text-white text-center py-5" style="background: url('https://via.placeholder.com/1920x400?text=Salud+Conectada+Header') no-repeat center/cover;">
-        <h1 class="display-3 fw-bold">SaludConectada</h1>
+        <a class="navbar-brand" href="#">
+                <img src="imagenes/logo2.png" alt="Logotipo SaludConectada" style="height: 150px;">
+        </a>
         <p class="lead">Tu salud, nuestra prioridad en tiempo real</p>
         <a href="#consulta" class="btn btn-success mt-3">Comienza ahora</a>
     </header>
 
+    <!-- Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="#">SaludConectada</a>
+            <a class="navbar-brand" href="#">saludConectada</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -36,120 +46,129 @@
         </div>
     </nav>
 
+    <!-- Contenido principal -->
     <main class="container my-5">
+        <!-- 24/7 Cuidado -->
         <div id="consulta" class="seccion">
             <h2 class="text-center text-primary">24/7 Cuidado</h2>
-            <p class="text-center">Accede a consultas médicas virtuales en cualquier momento con médicos certificados para condiciones no emergentes como resfriados, alergias, y más.</p>
-            <div class="text-center">
-                <button class="btn btn-success" id="iniciarVideollamadaBtn">Iniciar Videollamada</button>
-                <a href="#" class="btn btn-secondary mt-2">Aprender más</a>
+            <p class="text-center">Selecciona un médico para unirte a su videollamada:</p>
+            <div class="list-group">
+                <button class="list-group-item list-group-item-action" onclick="unirseVideollamada('CardioDoc1')">Cardiología - Dr. Médico 1</button>
+                <button class="list-group-item list-group-item-action" onclick="unirseVideollamada('DermaDoc2')">Dermatología - Dra. Médico 2</button>
+                <button class="list-group-item list-group-item-action" onclick="unirseVideollamada('EndoDoc3')">Endocrinología - Dr. Médico 3</button>
+                <button class="list-group-item list-group-item-action" onclick="unirseVideollamada('NeuroDoc4')">Neurología - Dra. Médico 4</button>
+                <button class="list-group-item list-group-item-action" onclick="unirseVideollamada('PediaDoc5')">Pediatría - Dr. Médico 5</button>
             </div>
-            <div class="mt-4">
-                <h5>¿Cómo Funciona?</h5>
-                <p>Haz clic en "Iniciar Videollamada" para conectarte con un médico en minutos. Solo necesitas completar un breve formulario con tus síntomas y antecedentes médicos.</p>
-            </div>
-            <div class="mt-4">
-                <h5>Condiciones que Tratamos</h5>
-                <ul>
-                    <li>Resfriados, gripes y fiebre</li>
-                    <li>Alergias estacionales o alimentarias</li>
-                    <li>Infecciones menores (urinarias, de piel)</li>
-                    <li>Dolores de cabeza o musculares</li>
-                    <li>Problemas digestivos leves</li>
-                </ul>
-            </div>
-            <div class="mt-4">
-                <h5>Opciones para Pacientes</h5>
-                <p>Personaliza tu experiencia:</p>
-                <ul>
-                    <li><a href="#">Chat en vivo</a> para consultas rápidas.</li>
-                    <li><a href="#">Subir historial médico</a> para un diagnóstico más preciso.</li>
-                    <li><a href="#">Solicitar receta médica</a> directamente desde la consulta.</li>
-                </ul>
-            </div>
-            <div id="jitsi-container"></div>
+            <!-- Contenedor para la videollamada -->
+            <div id="jitsi-container" style="height: 600px; width: 100%; border: 1px solid #ccc; display: none; margin-top: 20px;"></div>
         </div>
 
-        <div id="mental" class="seccion" style="display: none;">
-            <h2 class="text-center text-primary">Salud Mental</h2>
-            <p class="text-center">Cuidar tu bienestar emocional es esencial. Ofrecemos terapias personalizadas con psicólogos y psiquiatras certificados para tratar ansiedad, depresión, estrés y más.</p>
-            <div class="text-center mt-3">
-                <a href="#" class="btn btn-success">Agendar una Cita</a>
-                <a href="#" class="btn btn-secondary ml-2">Prueba de Autoevaluación</a>
-            </div>
-            <div class="mt-4">
-                <h5>Tipos de Terapia Disponibles</h5>
-                <ul>
-                    <li>Terapia Cognitivo-Conductual (TCC): Cambia patrones de pensamiento negativos.</li>
-                    <li>Terapia de Aceptación y Compromiso (ACT): Aprende a manejar emociones difíciles.</li>
-                    <li>Terapia Interpersonal: Mejora tus relaciones personales.</li>
-                    <li>Terapia de Grupo: Comparte experiencias en un entorno seguro.</li>
-                    <li>Psiquiatría: Evaluación y manejo de medicamentos.</li>
-                </ul>
-            </div>
-            <div class="mt-4">
-                <h5>Recursos para Pacientes</h5>
-                <p>Accede a herramientas y contenido útil:</p>
-                <ul>
-                    <li><a href="#">Videos de relajación</a> para reducir el estrés.</li>
-                    <li><a href="#">Artículos sobre salud mental</a> escritos por expertos.</li>
-                    <li><a href="#">Diario de emociones</a> para registrar tu progreso.</li>
-                </ul>
-            </div>
+    <!-- Salud Mental -->
+    <div id="mental" class="seccion" style="display: none;">
+        <h2 class="text-center text-primary">Salud Mental</h2>
+        <p class="text-center">Cuidar tu bienestar emocional es esencial. Ofrecemos terapias personalizadas con psicólogos y psiquiatras certificados para tratar ansiedad, depresión, estrés y más.</p>
+        <div class="text-center mt-3">
+            <a href="#" class="btn btn-success" onclick="agendarCita()">Agendar una Cita</a>
+            <button class="btn btn-secondary ml-2" onclick="pruebaAutoevaluacion()">Prueba de Autoevaluación</button>
         </div>
+        <div id="autoevaluation-section" class="mt-4" style="display: none;">
+            <h5>Prueba de Autoevaluación</h5>
+            <p>Responde a las siguientes preguntas sobre cómo te has sentido en las últimas 2 semanas. Usa la escala: 0 = Nada, 1 = Algunos días, 2 = Más de la mitad de los días, 3 = Casi todos los días.</p>
+            <form id="mental-health-form">
+                <!-- Preguntas de Depresión (basado en PHQ-2) -->
+                <div class="mb-3">
+                    <label>1. ¿Has tenido poco interés o placer en hacer cosas?</label><br>
+                    <input type="radio" name="q1" value="0" required> 0 (Nada)<br>
+                    <input type="radio" name="q1" value="1"> 1 (Algunos días)<br>
+                    <input type="radio" name="q1" value="2"> 2 (Más de la mitad de los días)<br>
+                    <input type="radio" name="q1" value="3"> 3 (Casi todos los días)<br>
+                </div>
+                <div class="mb-3">
+                    <label>2. ¿Te has sentido deprimido, desanimado o sin esperanza?</label><br>
+                    <input type="radio" name="q2" value="0" required> 0 (Nada)<br>
+                    <input type="radio" name="q2" value="1"> 1 (Algunos días)<br>
+                    <input type="radio" name="q2" value="2"> 2 (Más de la mitad de los días)<br>
+                    <input type="radio" name="q2" value="3"> 3 (Casi todos los días)<br>
+                </div>
+                <!-- Preguntas de Ansiedad (basado en GAD-2) -->
+                <div class="mb-3">
+                    <label>3. ¿Te has sentido nervioso, ansioso o al borde de un ataque de pánico?</label><br>
+                    <input type="radio" name="q3" value="0" required> 0 (Nada)<br>
+                    <input type="radio" name="q3" value="1"> 1 (Algunos días)<br>
+                    <input type="radio" name="q3" value="2"> 2 (Más de la mitad de los días)<br>
+                    <input type="radio" name="q3" value="3"> 3 (Casi todos los días)<br>
+                </div>
+                <div class="mb-3">
+                    <label>4. ¿No has podido detenerte o controlar tu preocupación?</label><br>
+                    <input type="radio" name="q4" value="0" required> 0 (Nada)<br>
+                    <input type="radio" name="q4" value="1"> 1 (Algunos días)<br>
+                    <input type="radio" name="q4" value="2"> 2 (Más de la mitad de los días)<br>
+                    <input type="radio" name="q4" value="3"> 3 (Casi todos los días)<br>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Respuestas</button>
+            </form>
+            <div id="evaluation-result" class="mt-4"></div>
+        </div>
+        <div class="mt-4">
+            <h5>Videos de Relajación</h5>
+            <iframe src="https://www.youtube.com/embed/1ZYbU82ZVzI" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="mt-4">
+            <h5>Artículos sobre Salud Mental</h5>
+            <a href="https://www.who.int/es/news-room/fact-sheets/detail/mental-health-strengthening-our-response" target="_blank">Salud Mental - OMS</a>
+        </div>
+        <div class="mt-4">
+            <h5>Diario de Emociones</h5>
+            <textarea id="diary" rows="4" cols="50" placeholder="Escribe cómo te sientes hoy..."></textarea><br>
+            <button onclick="saveDiary()">Guardar</button>
+            <p id="diary-result"></p>
+        </div>
+    </div>
 
+        <!-- Prevención -->
         <div id="prevencion" class="seccion" style="display: none;">
             <h2 class="text-center text-primary">Prevención</h2>
             <p class="text-center">Adopta hábitos saludables y mantente un paso adelante de las enfermedades con nuestros recursos preventivos.</p>
             <div class="mt-4">
-                <h5>Consejos para una Vida Saludable</h5>
-                <ul>
-                    <li>Chequeos anuales: Detecta problemas a tiempo.</li>
-                    <li>Dieta equilibrada: Incluye frutas, verduras y proteínas magras.</li>
-                    <li>Ejercicio: 30 minutos al día, 5 días a la semana.</li>
-                    <li>Hidratación: Bebe al menos 2 litros de agua diarios.</li>
-                    <li>Sueño: Descansa entre 7-9 horas por noche.</li>
+                <h5>Calculadora de Riesgos</h5>
+                <form id="risk-calculator">
+                    <input type="number" id="age" placeholder="Edad" required>
+                    <input type="number" id="weight" placeholder="Peso (kg)" required>
+                    <input type="number" id="height" placeholder="Altura (cm)" required>
+                    <button type="submit">Calcular</button>
+                </form>
+                <p id="risk-result"></p>
+            </div>
+            <div class="mt-4">
+                <h5>Plan de Prevención Personalizado</h5>
+                <p id="prevention-plan"></p>
+                <h6 class="mt-3">Hábitos Saludables Generales</h6>
+                <ul id="healthy-habits" class="list-group">
+                    <li class="list-group-item">Realiza al menos 30 minutos de ejercicio moderado al día.</li>
+                    <li class="list-group-item">Consume una dieta rica en frutas y verduras.</li>
+                    <li class="list-group-item">Mantén una hidratación adecuada (2-3 litros de agua al día).</li>
+                    <li class="list-group-item">Duerme entre 7-8 horas por noche.</li>
+                    <li class="list-group-item">Evita el consumo excesivo de alcohol y tabaco.</li>
                 </ul>
-            </div>
-            <div class="mt-4">
-                <h5>Encuentra Centros de Salud</h5>
-                <p>Explora nuestro mapa interactivo para localizar clínicas y hospitales cercanos.</p>
-                <div id="map" style="height: 400px; width: 100%; background-color: #E0E0E0;"></div>
-            </div>
-            <div class="mt-4">
-                <h5>Opciones Interactivas</h5>
-                <ul>
-                    <li><a href="#">Calculadora de riesgo</a>: Evalúa tu salud general.</li>
-                    <li><a href="#">Plan de prevención personalizado</a>: Recibe recomendaciones según tu edad y estilo de vida.</li>
+                <h6 class="mt-3">Recomendaciones Personalizadas</h6>
+                <ul id="custom-recommendations" class="list-group">
+                    <!-- Se llenará dinámicamente según el IMC -->
                 </ul>
             </div>
         </div>
 
+        <!-- Nutrición y Hábitos Saludables -->
         <div id="nutricion" class="seccion" style="display: none;">
             <h2 class="text-center text-primary">Nutrición y Hábitos Saludables</h2>
-            <p class="text-center">Mejora tu calidad de vida con planes de alimentación personalizados y consejos para adoptar hábitos saludables a largo plazo.</p>
+            <p class="text-center">Consulta con nuestro nutricionista certificado.</p>
             <div class="text-center mt-3">
-                <a href="#" class="btn btn-success">Consultar con un Nutricionista</a>
-                <a href="#" class="btn btn-secondary ml-2">Ver Recursos</a>
+                <button class="btn btn-success" onclick="unirseVideollamada('NutriPro')">Consultar con Nutricionista</button>
             </div>
-            <div class="mt-4">
-                <h5>Consejos para una Alimentación Saludable</h5>
-                <ul>
-                    <li>Incorpora una variedad de frutas y verduras en cada comida.</li>
-                    <li>Elige granos integrales en lugar de refinados.</li>
-                    <li>Reduce el consumo de azúcares añadidos y grasas saturadas.</li>
-                </ul>
-            </div>
-            <div class="mt-4">
-                <h5>Opciones Interactivas</h5>
-                <ul>
-                    <li><a href="#">Calculadora de calorías</a>: Planifica tus comidas.</li>
-                    <li><a href="#">Recetas saludables</a>: Inspírate con ideas nutritivas.</li>
-                    <li><a href="#">Seguimiento de hábitos</a>: Registra tu progreso diario.</li>
-                </ul>
-            </div>
+            <!-- Contenedor para la videollamada del nutricionista -->
+            <div id="jitsi-container" style="height: 600px; width: 100%; border: 1px solid #ccc; display: none; margin-top: 20px;"></div>
         </div>
 
+        <!-- Especialidad y Bienestar -->
         <div id="especialidad" class="seccion" style="display: none;">
             <h2 class="text-center text-primary">Especialidad y Bienestar</h2>
             <p class="text-center">Consulta con especialistas y mejora tu calidad de vida con programas diseñados para tu bienestar físico y mental.</p>
@@ -185,6 +204,7 @@
             </div>
         </div>
 
+        <!-- Mi Perfil -->
         <div id="perfil" class="seccion" style="display: none;">
             <h2 class="text-center text-primary">Mi Perfil</h2>
             <div class="card p-4">
@@ -199,13 +219,14 @@
             </div>
         </div>
 
+        <!-- Nuestro Equipo -->
         <div id="equipo" class="seccion" style="display: none;">
             <h2 class="text-center text-primary">Nuestro Equipo</h2>
             <p class="text-center">Conoce a los profesionales que hacen posible SaludConectada.</p>
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="card text-center">
-                        <img src="https://via.placeholder.com/150?text=Fiorella" class="card-img-top rounded-circle mx-auto mt-3" alt="Fiorella Palomeque" style="width: 150px; height: 150px;">
+                        <img src="imagenes/cardiologa.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Fiorella Palomeque" style="width: 150px; height: 150px;">
                         <div class="card-body">
                             <h5 class="card-title">Fiorella Palomeque</h5>
                             <p class="card-text">Cardióloga</p>
@@ -216,7 +237,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card text-center">
-                        <img src="https://via.placeholder.com/150?text=Gabriela" class="card-img-top rounded-circle mx-auto mt-3" alt="Gabriela Salazar" style="width: 150px; height: 150px;">
+                        <img src="imagenes/psicologa.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Gabriela Salazar" style="width: 150px; height: 150px;">
                         <div class="card-body">
                             <h5 class="card-title">Gabriela Salazar</h5>
                             <p class="card-text">Psicóloga</p>
@@ -227,7 +248,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card text-center">
-                        <img src="https://via.placeholder.com/150?text=Leonardo" class="card-img-top rounded-circle mx-auto mt-3" alt="Leonardo Salazar" style="width: 150px; height: 150px;">
+                        <img src="imagenes/nutricionista.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Leonardo Salazar" style="width: 150px; height: 150px;">
                         <div class="card-body">
                             <h5 class="card-title">Leonardo Salazar</h5>
                             <p class="card-text">Nutricionista</p>
@@ -238,7 +259,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card text-center">
-                        <img src="https://via.placeholder.com/150?text=Sofía" class="card-img-top rounded-circle mx-auto mt-3" alt="Sofía Crespo" style="width: 150px; height: 150px;">
+                        <img src="imagenes/nutricionista2.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Sofía Crespo" style="width: 150px; height: 150px;">
                         <div class="card-body">
                             <h5 class="card-title">Sofía Crespo</h5>
                             <p class="card-text">Nutricionista</p>
@@ -249,11 +270,11 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card text-center">
-                        <img src="https://via.placeholder.com/150?text=Andrés" class="card-img-top rounded-circle mx-auto mt-3" alt="Andrés Padrón" style="width: 150px; height: 150px;">
+                        <img src="imagenes/medicogeneral.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Andres Padrón" style="width: 150px; height: 150px;">
                         <div class="card-body">
-                            <h5 class="card-title">Andrés Padrón</h5>
+                            <h5 class="card-title">Andres Padrón</h5>
                             <p class="card-text">Médico General</p>
-                            <p class="card-text">Atención primaria y diagnóstico inicial.</p>
+                            <p class="card-text">Medicina general</p>
                             <p class="card-text">Contacto: <a href="tel:0995693097">0995693097</a></p>
                         </div>
                     </div>
@@ -262,12 +283,13 @@
         </div>
     </main>
 
+    <!-- Pie de página -->
     <footer class="bg-primary text-white text-center py-3">
         <p>© 2025 SaludConectada. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- Bootstrap JS y nuestro script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://meet.jit.si/external_api.js"></script>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
