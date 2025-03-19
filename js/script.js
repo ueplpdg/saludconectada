@@ -180,3 +180,108 @@ document.getElementById('risk-calculator').addEventListener('submit', (e) => {
 
 // Mostrar "Consulta" por defecto al cargar
 mostrarSeccion('consulta');
+
+// Inicializar Flatpickr para el calendario
+document.addEventListener('DOMContentLoaded', function() {
+    flatpickr("#appointment-date", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        minDate: "today",
+        time_24hr: true,
+        minuteIncrement: 30, // Intervalos de 30 minutos
+        disable: [
+            function(date) {
+                // Deshabilitar fines de semana (sábado y domingo)
+                return (date.getDay() === 0 || date.getDay() === 6);
+            }
+        ],
+        enable: [
+            // Horarios disponibles: 9:00 a 17:00
+            function(date) {
+                const hour = date.getHours();
+                return hour >= 9 && hour < 17;
+            }
+        ],
+        onChange: function(selectedDates, dateStr, instance) {
+            checkAvailability(dateStr);
+        }
+    });
+
+    // Manejar el formulario de citas
+    const form = document.getElementById('appointment-form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const specialist = document.getElementById('specialist').value;
+            const dateTime = document.getElementById('appointment-date').value;
+
+            if (!specialist || !dateTime) {
+                alert('Por favor, selecciona un especialista y una fecha/hora.');
+                return;
+            }
+
+            // Verificar disponibilidad
+            const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+            const isTaken = appointments.some(appointment => 
+                appointment.specialist === specialist && appointment.dateTime === dateTime
+            );
+
+            if (isTaken) {
+                alert('Lo siento, ese horario ya está ocupado. Por favor, selecciona otro.');
+                return;
+            }
+
+            // Generar código único para el paciente
+            const patientCode = 'PAC-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+
+            // Guardar la cita
+            const appointment = {
+                specialist: specialist,
+                dateTime: dateTime,
+                patientCode: patientCode,
+                createdAt: new Date().toISOString()
+            };
+            appointments.push(appointment);
+            localStorage.setItem('appointments', JSON.stringify(appointments));
+
+            // Mostrar resultado
+            const resultDiv = document.getElementById('appointment-result');
+            resultDiv.innerHTML = `
+                <div class="alert alert-success">
+                    <h5>Cita Agendada Exitosamente</h5>
+                    <p><strong>Especialista:</strong> ${specialist}</p>
+                    <p><strong>Fecha y Hora:</strong> ${dateTime}</p>
+                    <p><strong>Código Único:</strong> ${patientCode}</p>
+                    <p>Guarda este código para referencia futura.</p>
+                </div>
+            `;
+
+            // Limpiar formulario
+            form.reset();
+            document.getElementById('appointment-date').value = '';
+        });
+    }
+});
+
+// Función para verificar disponibilidad (opcional: mostrar mensaje si el horario está ocupado)
+function checkAvailability(dateTime) {
+    const specialist = document.getElementById('specialist').value;
+    if (!specialist || !dateTime) return;
+
+    const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+    const isTaken = appointments.some(appointment => 
+        appointment.specialist === specialist && appointment.dateTime === dateTime
+    );
+
+    const resultDiv = document.getElementById('appointment-result');
+    if (isTaken) {
+        resultDiv.innerHTML = `
+            <div class="alert alert-warning">
+                <p>El horario seleccionado ya está ocupado. Por favor, elige otro.</p>
+            </div>
+        `;
+    } else {
+        resultDiv.innerHTML = '';
+    }
+}
