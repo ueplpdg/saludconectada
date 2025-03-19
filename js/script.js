@@ -195,13 +195,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return (date.getDay() === 0 || date.getDay() === 6);
             }
         ],
-        enable: [
-            // Horarios disponibles: 9:00 a 17:00
-            function(date) {
-                const hour = date.getHours();
-                return hour >= 9 && hour < 17;
-            }
-        ],
         onChange: function(selectedDates, dateStr, instance) {
             checkAvailability(dateStr);
         }
@@ -218,6 +211,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (!specialist || !dateTime) {
                 alert('Por favor, selecciona un especialista y una fecha/hora.');
+                return;
+            }
+
+            // Validar horario (9:00 a 17:00)
+            const selectedDate = new Date(dateTime);
+            const hour = selectedDate.getHours();
+            if (hour < 9 || hour >= 17) {
+                alert('Por favor, selecciona un horario entre las 9:00 y las 17:00.');
                 return;
             }
 
@@ -264,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Función para verificar disponibilidad (opcional: mostrar mensaje si el horario está ocupado)
+// Función para verificar disponibilidad
 function checkAvailability(dateTime) {
     const specialist = document.getElementById('specialist').value;
     if (!specialist || !dateTime) return;
