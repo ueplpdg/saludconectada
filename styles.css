@@ -93,53 +93,28 @@ h2 {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    position: relative;
-    overflow: hidden;
-}
-
-h2::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #FFFFFF;
-    animation: typeEffect 1s steps(20) forwards;
-}
-
-@keyframes typeEffect {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
 }
 
 .card {
     background: linear-gradient(135deg, #FFFFFF, #FFFDF7);
     border: 2px solid #34265B;
     border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(52, 38, 91, 0.3);
 }
 
-.card::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(to bottom right, transparent, rgba(255, 255, 255, 0.2), transparent);
-    animation: shine 4s infinite;
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
 }
 
-@keyframes shine {
-    0% { transform: translateX(-100%) translateY(-100%); }
-    50% { transform: translateX(100%) translateY(100%); }
-    100% { transform: translateX(-100%) translateY(-100%); }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.navbar-brand img {
+    height: 40px; /* Ajusta según el tamaño de tu logotipo */
 }
