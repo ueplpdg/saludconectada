@@ -14,6 +14,9 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" defer></script>
     <!-- Jitsi Meet API -->
     <script src="https://meet.jit.si/external_api.js"></script>
+    <!-- Flatpickr CSS y JS para el calendario -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
     <!-- Header impactante -->
@@ -35,6 +38,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('consulta')">24/7 Cuidado</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('citas')">Agendar Cita</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('mental')">Salud Mental</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('prevencion')">Prevención</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('nutricion')">Nutrición y Hábitos Saludables</a></li>
@@ -63,6 +67,38 @@
             <div id="jitsi-container" style="height: 600px; width: 100%; border: 1px solid #ccc; display: none; margin-top: 20px;"></div>
         </div>
 
+        <!-- Agendar Cita -->
+        <div id="citas" class="seccion" style="display: none;">
+            <h2 class="text-center text-primary">Agendar Cita</h2>
+            <p class="text-center">Selecciona un especialista y un horario disponible para tu cita.</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form id="appointment-form">
+                        <div class="mb-3">
+                            <label for="specialist" class="form-label">Especialista</label>
+                            <select id="specialist" class="form-select" required>
+                                <option value="" disabled selected>Selecciona un especialista</option>
+                                <option value="Cardiología - Dr. Médico 1">Cardiología - Dr. Médico 1</option>
+                                <option value="Dermatología - Dra. Médico 2">Dermatología - Dra. Médico 2</option>
+                                <option value="Endocrinología - Dr. Médico 3">Endocrinología - Dr. Médico 3</option>
+                                <option value="Neurología - Dra. Médico 4">Neurología - Dra. Médico 4</option>
+                                <option value="Pediatría - Dr. Médico 5">Pediatría - Dr. Médico 5</option>
+                                <option value="Psicología - Gabriela Salazar">Psicología - Gabriela Salazar</option>
+                                <option value="Psiquiatría - Leonardo Salazar">Psiquiatría - Leonardo Salazar</option>
+                                <option value="Nutrición - Sofía Crespo">Nutrición - Sofía Crespo</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="appointment-date" class="form-label">Fecha y Hora</label>
+                            <input type="text" id="appointment-date" class="form-control" placeholder="Selecciona fecha y hora" required>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Agendar Cita</button>
+                    </form>
+                    <div id="appointment-result" class="mt-4"></div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Salud Mental -->
         <div id="mental" class="seccion" style="display: none;">
             <h2 class="text-center text-primary">Salud Mental</h2>
