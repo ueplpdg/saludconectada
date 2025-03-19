@@ -183,22 +183,27 @@ mostrarSeccion('consulta');
 
 // Inicializar Flatpickr para el calendario
 document.addEventListener('DOMContentLoaded', function() {
-    flatpickr("#appointment-date", {
-        enableTime: true,
-        dateFormat: "Y-m-d H:i",
-        minDate: "today",
-        time_24hr: true,
-        minuteIncrement: 30, // Intervalos de 30 minutos
-        disable: [
-            function(date) {
-                // Deshabilitar fines de semana (sábado y domingo)
-                return (date.getDay() === 0 || date.getDay() === 6);
+    // Asegurarnos de que el elemento existe antes de inicializar Flatpickr
+    const dateInput = document.getElementById('appointment-date');
+    if (dateInput) {
+        flatpickr(dateInput, {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: "today",
+            time_24hr: true,
+            minuteIncrement: 30, // Intervalos de 30 minutos
+            // No usamos disable ni enable para simplificar; validaremos manualmente
+            onChange: function(selectedDates, dateStr, instance) {
+                console.log("Fecha seleccionada:", dateStr); // Depuración
+                checkAvailability(dateStr);
+            },
+            onReady: function(selectedDates, dateStr, instance) {
+                console.log("Flatpickr inicializado correctamente"); // Depuración
             }
-        ],
-        onChange: function(selectedDates, dateStr, instance) {
-            checkAvailability(dateStr);
-        }
-    });
+        });
+    } else {
+        console.error("El elemento #appointment-date no se encontró en el DOM");
+    }
 
     // Manejar el formulario de citas
     const form = document.getElementById('appointment-form');
@@ -214,8 +219,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Validar horario (9:00 a 17:00)
+            // Validar que sea un día laborable (lunes a viernes)
             const selectedDate = new Date(dateTime);
+            const day = selectedDate.getDay();
+            if (day === 0 || day === 6) {
+                alert('Por favor, selecciona un día laborable (lunes a viernes).');
+                return;
+            }
+
+            // Validar horario (9:00 a 17:00)
             const hour = selectedDate.getHours();
             if (hour < 9 || hour >= 17) {
                 alert('Por favor, selecciona un horario entre las 9:00 y las 17:00.');
@@ -262,6 +274,8 @@ document.addEventListener('DOMContentLoaded', function() {
             form.reset();
             document.getElementById('appointment-date').value = '';
         });
+    } else {
+        console.error("El elemento #appointment-form no se encontró en el DOM");
     }
 });
 
