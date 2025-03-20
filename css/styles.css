@@ -280,6 +280,27 @@ h2 {
     color: #2E4A62; /* Texto en azul oscuro */
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06); /* Sombra más suave y moderna */
     transition: all 0.3s ease; /* Transición suave para todos los cambios */
+    width: 100%; /* Aseguramos que el ancho sea 100% dentro del contenedor */
+    box-sizing: border-box; /* Incluimos padding y border en el ancho */
+}
+
+/* Estilo específico para textarea */
+textarea.form-control {
+    resize: vertical; /* Permitimos redimensionar solo verticalmente */
+    min-height: 100px; /* Altura mínima para el textarea */
+    max-height: 300px; /* Altura máxima para evitar que crezca demasiado */
+}
+
+/* Ajustes para versión móvil */
+@media (max-width: 768px) {
+    .form-control, .form-select, textarea.form-control {
+        padding: 0.75rem 1rem; /* Reducimos el padding en móviles */
+        font-size: 0.95rem; /* Tamaño de fuente ligeramente más pequeño */
+    }
+
+    textarea.form-control {
+        min-height: 80px; /* Reducimos la altura mínima en móviles */
+    }
 }
 
 .form-control:focus, .form-select:focus, textarea.form-control:focus {
