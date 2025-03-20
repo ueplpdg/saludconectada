@@ -25,7 +25,7 @@
                 <img src="imagenes/logotipoSaludConectada.png" alt="Logotipo SaludConectada" style="height: 300px;">
         </a>
         <p class="lead">Tu salud, nuestra prioridad en tiempo real</p>
-        <a href="#consulta" class="btn btn-success mt-3">Comienza ahora</a>
+        <a href="#" onclick="mostrarSeccion('citas')" class="btn btn-success mt-3">Comienza ahora</a>
     </header>
 
     <!-- Navegación -->
@@ -203,11 +203,64 @@
         <div id="nutricion" class="seccion" style="display: none;">
             <h2 class="text-center">Nutrición y Hábitos Saludables</h2>
             <p class="text-center">Consulta con nuestro nutricionista certificado.</p>
-            <div class="text-center mt-3">
+            <div class="text-center">
                 <button class="btn btn-success" onclick="unirseVideollamada('NutriPro', 'jitsi-container-nutricion')">Consultar con Nutricionista</button>
             </div>
-            <!-- Contenedor para la videollamada del nutricionista -->
-            <div id="jitsi-container-nutricion" style="height: 600px; width: 100%; border: 1px solid #ccc; display: none; margin-top: 20px;"></div>
+            <div id="jitsi-container-nutricion" class="mt-4"></div>
+        
+            <!-- Evaluación de Hábitos Alimenticios -->
+            <div class="mt-5">
+                <h3 class="text-center">Evalúa tus Hábitos Alimenticios</h3>
+                <p class="text-center">Responde las siguientes preguntas para recibir recomendaciones personalizadas.</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <form id="nutrition-form">
+                            <div class="mb-3">
+                                <label for="meals-per-day" class="form-label">¿Cuántas comidas haces al día?</label>
+                                <select id="meals-per-day" class="form-select" required>
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="1-2">1-2 comidas</option>
+                                    <option value="3">3 comidas</option>
+                                    <option value="4-5">4-5 comidas</option>
+                                    <option value="6+">6 o más comidas</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="water-intake" class="form-label">¿Cuánta agua bebes al día?</label>
+                                <select id="water-intake" class="form-select" required>
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="less-1L">Menos de 1 litro</option>
+                                    <option value="1-2L">1-2 litros</option>
+                                    <option value="2-3L">2-3 litros</option>
+                                    <option value="more-3L">Más de 3 litros</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fruit-vegetable" class="form-label">¿Cuántas porciones de frutas y verduras consumes al día?</label>
+                                <select id="fruit-vegetable" class="form-select" required>
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="0-1">0-1 porciones</option>
+                                    <option value="2-3">2-3 porciones</option>
+                                    <option value="4-5">4-5 porciones</option>
+                                    <option value="6+">6 o más porciones</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="processed-food" class="form-label">¿Con qué frecuencia consumes alimentos procesados o ultraprocesados?</label>
+                                <select id="processed-food" class="form-select" required>
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="daily">Diariamente</option>
+                                    <option value="weekly">Semanalmente</option>
+                                    <option value="rarely">Rara vez</option>
+                                    <option value="never">Nunca</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Evaluar Hábitos</button>
+                        </form>
+                        <div id="nutrition-result" class="mt-4"></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Especialidad y Bienestar -->
@@ -240,8 +293,8 @@
             <div class="mt-4">
                 <h5>Opciones Interactivas</h5>
                 <ul>
-                    <li><a href="#">Quiz de bienestar</a>: Descubre áreas a mejorar.</li>
-                    <li><a href="#">Agenda con especialistas</a>: Elige tu médico.</li>
+                    <button class="btn btn-primary mr-2" onclick="quizBienestar()">Quiz de Bienestar</button>
+                    <button class="btn btn-success" onclick="mostrarSeccion('citas')">Agenda con Especialistas</button>
                 </ul>
             </div>
         </div>
