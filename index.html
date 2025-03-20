@@ -161,7 +161,7 @@
             </div>
             <div class="mt-4">
                 <h5>Diario de Emociones</h5>
-                <textarea id="diary" class="form-label" rows="4" cols="50" placeholder="Escribe cómo te sientes hoy..."></textarea><br>
+                <textarea id="diary" rows="4" cols="50" placeholder="Escribe cómo te sientes hoy..."></textarea><br>
                 <button class="btn btn-secondary ml-2" onclick="saveDiary()">Guardar</button>
                 <p id="diary-result"></p>
             </div>
@@ -174,10 +174,10 @@
             <div class="mt-4">
                 <h5>Calculadora de Riesgos</h5>
                 <form id="risk-calculator">
-                    <input type="number" id="age" placeholder="Edad" required>
-                    <input type="number" id="weight" placeholder="Peso (kg)" required>
-                    <input type="number" id="height" placeholder="Altura (cm)" required>
-                    <button type="submit">Calcular</button>
+                    <input type="submit" id="age" placeholder="Edad" required>
+                    <input type="submit" id="weight" placeholder="Peso (kg)" required>
+                    <input type="submit" id="height" placeholder="Altura (cm)" required>
+                    <button type="submit" class="btn btn-primary">Calcular</button>
                 </form>
                 <p id="risk-result"></p>
             </div>
@@ -246,21 +246,6 @@
             </div>
         </div>
 
-        <!-- Mi Perfil -->
-        <div id="perfil" class="seccion" style="display: none;">
-            <h2 class="text-center">Mi Perfil</h2>
-            <div class="card p-4">
-                <h5>Historial Médico</h5>
-                <ul id="historial" class="list-group">
-                    <li class="list-group-item">Diabetes tipo 2 - 2023</li>
-                </ul>
-                <h5 class="mt-4">Recordatorios</h5>
-                <input type="text" id="nuevoRecordatorio" class="form-control mb-2" placeholder="Ej: Insulina a las 8:00">
-                <button class="btn btn-success" onclick="agregarRecordatorio()">Agregar</button>
-                <ul id="recordatorios" class="list-group mt-2"></ul>
-            </div>
-        </div>
-        
         <!-- Nuestro Equipo -->
         <div id="equipo" class="seccion" style="display: none;">
             <h2 class="text-center">Nuestro Equipo</h2>
