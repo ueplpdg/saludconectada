@@ -1,15 +1,21 @@
 // Evaluación de Hábitos Alimenticios
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM cargado, buscando formulario...');
     const nutritionForm = document.getElementById('nutrition-form');
+    
     if (nutritionForm) {
+        console.log('Formulario encontrado, agregando evento submit...');
         nutritionForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            console.log('Formulario enviado, procesando respuestas...');
 
             // Obtener respuestas
             const mealsPerDay = document.getElementById('meals-per-day').value;
             const waterIntake = document.getElementById('water-intake').value;
             const fruitVegetable = document.getElementById('fruit-vegetable').value;
             const processedFood = document.getElementById('processed-food').value;
+
+            console.log('Respuestas:', { mealsPerDay, waterIntake, fruitVegetable, processedFood });
 
             // Calcular un puntaje simple basado en las respuestas
             let score = 0;
@@ -67,20 +73,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Mostrar resultado
             const resultDiv = document.getElementById('nutrition-result');
-            resultDiv.innerHTML = `
-                <div class="alert alert-info">
-                    <h5>Resultado de la Evaluación</h5>
-                    <p>${message}</p>
-                    ${recommendations.length > 0 ? '<h6>Recomendaciones:</h6><ul>' + recommendations.map(rec => `<li>${rec}</li>`).join('') + '</ul>' : ''}
-                </div>
-            `;
+            if (resultDiv) {
+                console.log('Mostrando resultado...');
+                resultDiv.innerHTML = `
+                    <div class="alert alert-info">
+                        <h5>Resultado de la Evaluación</h5>
+                        <p>${message}</p>
+                        ${recommendations.length > 0 ? '<h6>Recomendaciones:</h6><ul>' + recommendations.map(rec => `<li>${rec}</li>`).join('') + '</ul>' : ''}
+                    </div>
+                `;
+            } else {
+                console.error('No se encontró el elemento #nutrition-result');
+            }
 
             // Limpiar formulario
             nutritionForm.reset();
         });
+    } else {
+        console.error('No se encontró el formulario con id="nutrition-form"');
     }
 });
-
 
 
 // Mostrar secciones con animación
