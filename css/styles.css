@@ -90,6 +90,50 @@ header p {
     background-color: rgba(230, 240, 231, 0.95) !important; /* Verde claro ajustado */
 }
 
+/* Estilo del botón de hamburguesa en móviles */
+.navbar-toggler {
+    border: none; /* Quitamos el borde predeterminado */
+    padding: 0.5rem;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(46, 74, 98, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; /* Icono en azul oscuro #2E4A62 */
+    width: 30px;
+    height: 30px;
+}
+
+.navbar-brand {
+    color: #2E4A62 !important; /* Azul oscuro para el texto "SaludConectada" */
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #A3BFA2 !important; /* Verde oscuro al pasar el cursor */
+}
+
+.navbar-brand img {
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.05);
+}
+
+.navbar-nav .nav-link {
+    color: #2E4A62 !important; /* Azul oscuro para las letras */
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #A3BFA2 !important; /* Verde oscuro para hover */
+}
+
 .navbar-brand {
     color: #2E4A62 !important; /* Azul oscuro para el texto "SaludConectada" */
     font-size: 1.5rem;
@@ -226,16 +270,43 @@ h2 {
 }
 
 /* Estilo de los formularios */
-.form-control, .form-select {
-    border-radius: 8px;
+.form-control, .form-select, textarea.form-control {
+    background-color: #F5F8F5; /* Fondo verde muy claro para consistencia con las secciones */
+    border-radius: 14px; /* Bordes aún más redondeados para un look moderno */
     border: 1px solid #A3BFA2; /* Verde oscuro para el borde */
-    padding: 0.75rem;
-    transition: border-color 0.3s ease;
+    padding: 0.85rem 1.2rem; /* Más espacio interno para un look más espacioso */
+    font-size: 1rem;
+    font-weight: 400;
+    color: #2E4A62; /* Texto en azul oscuro */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06); /* Sombra más suave y moderna */
+    transition: all 0.3s ease; /* Transición suave para todos los cambios */
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus, .form-select:focus, textarea.form-control:focus {
     border-color: #A3BFA2; /* Verde oscuro */
-    box-shadow: 0 0 0 3px rgba(163, 191, 162, 0.1);
+    box-shadow: 0 0 0 4px rgba(163, 191, 162, 0.25); /* Sombra más pronunciada al enfocar */
+    transform: translateY(-2px); /* Elevación más notable al enfocar */
+    background-color: #FFFFFF; /* Fondo blanco al enfocar para contraste */
+    outline: none;
+}
+
+/* Placeholder */
+.form-control::placeholder, textarea.form-control::placeholder {
+    color: #A3BFA2; /* Verde oscuro para el placeholder */
+    opacity: 0.7;
+}
+
+/* Estilo de las etiquetas */
+.form-label {
+    color: #2E4A62; /* Azul oscuro para las etiquetas */
+    font-weight: 500;
+    font-size: 1.1rem; /* Tamaño ligeramente mayor para las etiquetas */
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.form-label:hover {
+    color: #A3BFA2; /* Verde oscuro al pasar el cursor sobre la etiqueta */
 }
 
 /* Estilo del video */
