@@ -313,3 +313,85 @@ function checkAvailability(dateTime) {
         resultDiv.innerHTML = '';
     }
 }
+// Evaluación de Hábitos Alimenticios
+document.addEventListener('DOMContentLoaded', function() {
+    const nutritionForm = document.getElementById('nutrition-form');
+    if (nutritionForm) {
+        nutritionForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Obtener respuestas
+            const mealsPerDay = document.getElementById('meals-per-day').value;
+            const waterIntake = document.getElementById('water-intake').value;
+            const fruitVegetable = document.getElementById('fruit-vegetable').value;
+            const processedFood = document.getElementById('processed-food').value;
+
+            // Calcular un puntaje simple basado en las respuestas
+            let score = 0;
+            let recommendations = [];
+
+            // Evaluar comidas al día
+            if (mealsPerDay === '3' || mealsPerDay === '4-5') {
+                score += 2;
+            } else if (mealsPerDay === '1-2') {
+                score -= 1;
+                recommendations.push('Intenta aumentar a 3-5 comidas al día para mantener un metabolismo estable.');
+            } else {
+                recommendations.push('Evita comer demasiadas veces al día; 3-5 comidas balanceadas son ideales.');
+            }
+
+            // Evaluar consumo de agua
+            if (waterIntake === '2-3L' || waterIntake === 'more-3L') {
+                score += 2;
+            } else if (waterIntake === 'less-1L') {
+                score -= 1;
+                recommendations.push('Aumenta tu consumo de agua a al menos 2 litros al día para mantenerte hidratado.');
+            } else {
+                recommendations.push('Intenta llegar a 2-3 litros de agua al día para una hidratación óptima.');
+            }
+
+            // Evaluar consumo de frutas y verduras
+            if (fruitVegetable === '4-5' || fruitVegetable === '6+') {
+                score += 2;
+            } else if (fruitVegetable === '0-1') {
+                score -= 1;
+                recommendations.push('Incorpora más frutas y verduras en tu dieta; apunta a 5 porciones al día.');
+            } else {
+                recommendations.push('Aumenta tu consumo de frutas y verduras a 4-5 porciones diarias.');
+            }
+
+            // Evaluar consumo de alimentos procesados
+            if (processedFood === 'rarely' || processedFood === 'never') {
+                score += 2;
+            } else if (processedFood === 'daily') {
+                score -= 1;
+                recommendations.push('Reduce el consumo de alimentos procesados; opta por alimentos frescos y naturales.');
+            } else {
+                recommendations.push('Intenta disminuir la frecuencia de alimentos procesados a "rara vez".');
+            }
+
+            // Generar mensaje general basado en el puntaje
+            let message = '';
+            if (score >= 6) {
+                message = '¡Tus hábitos alimenticios son excelentes! Sigue así para mantener una vida saludable.';
+            } else if (score >= 2) {
+                message = 'Tus hábitos alimenticios son buenos, pero hay áreas que puedes mejorar.';
+            } else {
+                message = 'Tus hábitos alimenticios necesitan atención. Sigue estas recomendaciones para mejorar tu salud.';
+            }
+
+            // Mostrar resultado
+            const resultDiv = document.getElementById('nutrition-result');
+            resultDiv.innerHTML = `
+                <div class="alert alert-info">
+                    <h5>Resultado de la Evaluación</h5>
+                    <p>${message}</p>
+                    ${recommendations.length > 0 ? '<h6>Recomendaciones:</h6><ul>' + recommendations.map(rec => `<li>${rec}</li>`).join('') + '</ul>' : ''}
+                </div>
+            `;
+
+            // Limpiar formulario
+            nutritionForm.reset();
+        });
+    }
+});
